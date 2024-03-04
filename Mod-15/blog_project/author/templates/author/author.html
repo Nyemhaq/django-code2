@@ -1,0 +1,16 @@
+{% extends 'base.html '%}
+
+{% load static %} 
+
+
+{% block title %}Author{%endblock%}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<form class="mt-5" style="width:50%;margin:auto" method="POST" action="">
+    {% csrf_token %}
+    {{form | crispy}}
+    <input class="btn btn-warning mb-5" type="submit" value="Submit">
+</form>
+
+{% endblock %}

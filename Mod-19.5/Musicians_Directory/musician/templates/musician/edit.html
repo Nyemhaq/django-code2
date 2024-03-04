@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Edit data{% endblock %}
+
+{% block content %}
+ 
+ <h1 class="text-center">Edit Table Data</h1>
+ <form style="width:60%;margin:auto" method="POST" action="">
+    {% csrf_token %}
+     {{form | crispy}}
+     <input class="btn btn-warning mb-5" type="submit" value="Submit">
+  </form>
+ 
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block title%}Form{% endblock %}
+
+{% block content %}
+
+<form method="POST" action="/first_app/about/" style="width:50%;margin:auto" class="pt-5">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputname" class="form-label">Name</label>
+      <input type="name" class="form-control" id="exampleInputname" aria-describedby="nameelp" name="username">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputemail" class="form-label">Email</label>
+      <input type="email" class="form-control" id="exampleInputemail" name="useremail">
+    </div>
+    <select class="form-select" aria-label="Default select example" name='ratings'>
+        <option selected>Ratings</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html '%}
+
+{% load static %} 
+
+
+{% block title %}Post{% endblock %}
+
+{% block content %}
+
+
+{% load crispy_forms_tags %}
+<h3 class="mt-5 text-center">Are you sure you want to delete?</h3>
+    <form class="mt-5" style="width:50%;margin:auto" method="POST" action="">
+        {% csrf_token %}
+        {{form | crispy}}
+        <input class="btn btn-warning mb-5" style="margin-left:70%" type="submit" value="Delete">
+    </form>
+
+
+{% endblock %}

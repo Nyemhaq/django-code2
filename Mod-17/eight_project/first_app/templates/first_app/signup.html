@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %} 
+
+{% load crispy_forms_tags %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+{% if messages %}
+    {% for i in messages %}
+        <small {% if i.tags %} class="{{i.tags}}" {% endif %}>{{i}}</small>
+    {% endfor %}
+{% endif %}
+<form class="mt-5" style="width:60%;margin:auto" method="POST" action="" novalidate>
+    {% csrf_token %}
+    {% comment %} {% for i in form %}
+        {{i.label_tag}}
+        {{i}}
+        {{i.errors | striptags }}
+    {% endfor %} {% endcomment %}
+
+    {{ form | crispy }}
+
+    <small>Already have an account? <a style="text-decoration:none;color:blue" href="{% url 'login'%}">Log in</a></small>
+    <br>
+    <input class="btn btn-primary mt-3 mb-5" type="Submit" name="Submit" id="">
+</form>
+
+
+{% endblock %}
+
+
