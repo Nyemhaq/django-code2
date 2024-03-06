@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static%}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="title">
+    <div class="img" style="postition:relative;overflow:hidden">
+        <img style="width:150%;" src="{% static 'img/car.jpg'%}" alt="">
+        <div class="container text" style="margin-left:5%;position:absolute; top:18%;">
+            <h1 style="color:#0f292e;font-family:Fantasy;">DIEZ Drive</h1>
+            <h1 style="color:#0f292e;font-family:Fantasy;">Crafting Tomorrow's Journeys Today</h1>
+            <br>
+            <p style="color:#0f292e;font-weight:300px;font-size:16px;font-family:Fantasy;text-align:justify">Welcome to Diez, where automotive innovation meets unrivaled craftsmanship. At Diez, we're dedicated to pushing the boundaries of automotive excellence, ensuring every vehicle we create is a testament to precision engineering, cutting-edge technology, and timeless design. With a commitment to sustainability and performance, our fleet embodies the perfect fusion of luxury, efficiency, and exhilaration. Whether you seek the thrill of the open road or the comfort of urban exploration, trust Diez to elevate your driving experience to new heights. Join us on the journey towards a future of automotive brilliance. Welcome to Diez - where driving dreams become reality.</p>
+            <button class="btn btn-secondary px-5">Explore Now</button>
+        </div>
+    </div>
+</div>
+<div style="margin-left:25%" >
+{% for i in brand_name %}
+<a class="btn btn-secondary px-3" style="margin-left:20px;margin-top:50px" href="{% url 'brand_wise_car' i.slug %}">{{i.name}}</a>
+{% endfor %}
+</div>
+
+<div>
+  <h3 class="text-center mt-5">Total {{ data | length }} results found!</h3>
+  <div class="d-flex flex-wrap justify-content-center mb-5">
+  {% for i in data %}
+    <div class="col-sm-3 mx-3 my-3">
+      <div class="card" style="width: 18rem;height:100%">
+        <img src="{{i.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{i.name}}</h5>
+          <p class="card-title" style="font-weight:200">Petrol , Diesel | 17.50 KM/L | Automatic, Manual</p>
+          <p class="card-text">Available in : {{i.price}}</p>
+          <p class="card-text">Brand : {{i.Brand.name}}</p>
+          <a href="{% url 'details' i.id%}" class="btn btn-primary">View Details</a>
+       </div>
+     </div>
+   </div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}
