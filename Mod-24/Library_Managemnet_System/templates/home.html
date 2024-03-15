@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static%}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div>
+  <div class="img">
+    <img src="{% static 'image/lib.jpg' %}" alt="" style="width:100%;position:relative;">
+    <div style="position: absolute; top: 56px; left: 0; width: 100%; height: 126%; background-color: rgba(0, 0, 0, 0.5);"></div>
+  </div>
+  <div class="text" style="position:absolute;top:25%;color:white;text-align: center;">
+    <h1 style="font-size:40px;">WELCOME</h1>
+    <h1 style="font-size:40px;">TO</h1>
+    <h1 style="font-size:40px;">DIEZ LIBRARY</h1>
+    <br>
+    <hr style="width:70%;margin:auto">
+    <br>
+    <p style="padding-left:10%;padding-right:10%;text-align:justify">At DIEZ, we offer a diverse collection of books covering various genres and topics, providing something for every reader's taste and interest. Whether you're an avid reader, a student, or simply looking to explore new literary adventures, our library has something for you.
+      With our extensive collection, borrowing books from DIEZ is a breeze. Simply browse our shelves, select the books you wish to read, and check them out at our friendly front desk. Our knowledgeable staff is always available to assist you in finding the perfect read or answering any questions you may have.  
+      We understand the importance of fostering a love for reading and learning in our community, which is why we strive to provide a welcoming and inclusive environment for all visitors. Whether you're here to dive into a classic novel, conduct research for a project, or simply escape into the pages of a captivating story, [Library Name] is here to support you on your literary journey.</p>
+      <br>
+      <a class="btn btn-outline-light" href="{% url 'register' %}" style="padding-left:6%;padding-right:6%" >Register Now</a>
+  </div>
+</div>
+
+<div style="margin-left:8%" >
+  <h1 class="mt-5 text-center" style="font-size:35px;color:#0a2345">Grave the Book according to your need</h1>
+    {% for i in category_name %}
+    <a class="btn btn-secondary px-3" style="margin-left:20px;margin-top:50px" href="{% url 'category_wise_car' i.slug %}">{{i.name}}</a>
+    {% endfor %}
+    </div>
+    
+    <div>
+      <h1 class="text-center mt-5 mb-5 p-2" style="background-color:#0099ff;color:white;">Total {{ data | length }} results found!</h1>
+      <div class="d-flex flex-wrap justify-content-center mb-5">
+      {% for i in data %}
+        <div class="col-sm-3 mx-3">
+          <div class="card" style="width: 18rem;height:80%">
+            <img src="{{i.image.url}}" class="card-img-top" alt="..." style="height:60%" >
+            <div class="card-body">
+              <h5 class="card-title">{{i.title}}</h5>
+              <p class="card-text">Available in BDT : {{i.borrowing_price}}</p>
+              <p class="card-text">Available copies : {{i.total_copy}}</p>
+              <p class="card-text">Category : {{i.category.name}}</p>
+              <br>
+              <a href="{% url 'details' i.id%}" class="btn btn-primary">View Details</a>
+           </div>
+         </div>
+       </div>
+      {% endfor %}
+      </div>
+    </div>
+
+{% endblock %}

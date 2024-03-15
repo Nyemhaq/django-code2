@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %} 
+
+{% block content %}
+
+<div>
+    <img src="{% static 'image/1.jpg'%}" alt="">
+    <h1>Oops! User has no Account!</h1>
+</div>
+
+{% endblock %}
