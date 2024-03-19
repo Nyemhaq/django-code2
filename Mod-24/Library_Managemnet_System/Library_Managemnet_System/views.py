@@ -12,3 +12,9 @@ def home(req, category_slug = None):
         
     return render(req,'home.html' ,{'data':data, 'category_name': category_name})
 
+def about(req):
+    return render (req,'about.html')
+
+def contact(req):
+    return render (req,'contact_us.html')
+

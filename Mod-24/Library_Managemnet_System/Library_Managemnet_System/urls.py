@@ -10,6 +10,8 @@ urlpatterns = [
     path('', include("accounts.urls")),
     path('', include("borrow_transactions.urls")),
     path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
     path('category/<slug:category_slug>/', views.home,name="category_wise_car"),
 ]
 

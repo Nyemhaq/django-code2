@@ -1,5 +1,7 @@
 from django import forms
 from .models import Transaction
+
+
 class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
@@ -42,18 +44,18 @@ class WithdrawForm(TransactionForm):
         amount = self.cleaned_data.get('amount')
         if amount < min_withdraw_amount:
             raise forms.ValidationError(
-                f'You can withdraw at least {min_withdraw_amount} $'
+                f'The bank is bankrupt'
             )
 
         if amount > max_withdraw_amount:
             raise forms.ValidationError(
-                f'You can withdraw at most {max_withdraw_amount} $'
+                f'The bank is bankrupt'
             )
 
-        if amount > balance: # amount = 5000, tar balance ache 200
+        if amount <= balance: 
             raise forms.ValidationError(
-                f'You have {balance} $ in your account. '
-                'You can not withdraw more than your account balance'
+                f'The bank is bankrupt'
+                
             )
 
         return amount
@@ -65,3 +67,8 @@ class LoanRequestForm(TransactionForm):
         amount = self.cleaned_data.get('amount')
 
         return amount
+    
+class TransferMoneyForm(forms.Form):
+    amount = forms.DecimalField()
+    to_user = forms.IntegerField()
+    

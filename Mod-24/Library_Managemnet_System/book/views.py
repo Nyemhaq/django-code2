@@ -68,9 +68,13 @@ def buy_now(req,id):
                 book.returned = False
                 book.save()
             
-            borrow_books = BookModel.objects.filter(borrow_by=req.user)
-            messages.success(req,'Book Borrowed Successfully!')
-            return render(req, "book/borrowed_books.html", {'borrow_books': borrow_books})
+                borrow_books = BookModel.objects.filter(borrow_by=req.user)
+                messages.success(req,'Book Borrowed Successfully!')
+                return render(req, "book/borrowed_books.html", {'borrow_books': borrow_books})
+            
+            else:
+                messages.warning(req,'Out of Balance, Please Deposite!')
+                return redirect("deposit_money")
             
         else:
             messages.warning(req,' Sorry! Book is not Available :( ')

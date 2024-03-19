@@ -17,6 +17,8 @@ from transactions.forms import (
     LoanRequestForm,
 )
 from transactions.models import Transaction
+from .forms import TransferMoneyForm
+
 
 def send_transaction_email(user, amount, subject, template):
         message = render_to_string(template, {
@@ -192,3 +194,26 @@ class LoanListView(LoginRequiredMixin,ListView):
         queryset = Transaction.objects.filter(account=user_account,transaction_type=3)
         print(queryset)
         return queryset
+    
+    
+class TransferMoneyView(View):
+    template_name = 'transactions/transfer_money.html'
+    
+    def get(self,req):
+        form = TransferMoneyForm(req.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            to_user_id = form.cleaned_data['to_user_id']
+            
+            user = req.user.account
+            
+            to_user = UserBankAccount.objects.get(account_number = to_user_id)
+            
+            user.balance -= amount
+            user.save()
+            
+            to_user.balance += amount
+            to_user.save()
+            
+            messages.success(req,"Money Transfered Successfully!")
+            return redirect(req,self.tempalte_name)

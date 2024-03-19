@@ -6,6 +6,12 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View
 from django.shortcuts import redirect
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.template.loader import render_to_string
 
 class UserRegistrationView(FormView):
     template_name = 'accounts/user_registration.html'
@@ -46,5 +52,28 @@ class UserBankAccountUpdateView(View):
             return redirect('profile')  # Redirect to the user's profile page
         return render(request, self.template_name, {'form': form})
     
+ 
+def send_transaction_email(user, subject, template):
+        message = render_to_string(template, {
+            'user' : user
+        })
+        send_email = EmailMultiAlternatives(subject, '', to=[user.email])
+        send_email.attach_alternative(message, "text/html")
+        send_email.send()
+   
+    
+@login_required    
+def change_pass(req):
+    if req.method == 'POST':
+        form = PasswordChangeForm(req.user, data=req.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(req,'Password Updated Successfully!')
+            update_session_auth_hash(req,form.user)
+            return redirect("profile")
+    else:
+        form = PasswordChangeForm(user=req.user)
+    send_transaction_email(req.user, "Change Password Message", "accounts/pass_change_email.html")
+    return render (req,'accounts/change_pass.html',{'form':form})
     
     
