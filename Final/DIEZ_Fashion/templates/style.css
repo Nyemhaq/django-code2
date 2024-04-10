@@ -1,0 +1,64 @@
+.navbar-custom, 
+.footer {
+    background-color: #FD8320;
+}
+#menu
+{
+    color: white;
+    font-size:18px;
+    font-weight: 100;
+}
+
+.logo
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.menu-bar
+{
+    text-align: center;
+    justify-content: space-around;
+}
+@media (min-width: 992px) {
+    .menu-bar {
+        text-align: center;
+        justify-content: space-around;
+        padding-left: 25%;
+    }
+}
+h5,h3{
+    align-items: center;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 100;
+}
+#btn
+{
+    color: black;
+    align-items: center;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 100;
+    text-align: center;
+    margin-left: 42%;
+
+}
+.footer
+{
+    align-items: center;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    color: white;
+    padding-top: 8%;
+    overflow: hidden;
+}
+.foot-1
+{
+        margin-left: 4%;
+        text-align: justify;
+}
+.foot-2
+{
+        margin-left: 60px;
+}
+

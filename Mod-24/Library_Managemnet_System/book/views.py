@@ -47,7 +47,6 @@ def change_password(req):
         form = PasswordChangeForm(user=req.user)
     return render (req,'book/change_pass.html',{'form':form})
 
-@login_required
 def details(request, id):
     book = BookModel.objects.get(pk=id)
     return render(request, 'book/details.html', {'book': book})

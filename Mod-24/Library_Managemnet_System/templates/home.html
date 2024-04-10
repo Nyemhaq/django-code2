@@ -22,11 +22,15 @@
       With our extensive collection, borrowing books from United is a breeze. Simply browse our shelves, select the books you wish to read, and check them out at our friendly front desk. Our knowledgeable staff is always available to assist you in finding the perfect read or answering any questions you may have.  
       We understand the importance of fostering a love for reading and learning in our community, which is why we strive to provide a welcoming and inclusive environment for all visitors. Whether you're here to dive into a classic novel, conduct research for a project, or simply escape into the pages of a captivating story, United is here to support you on your literary journey.</p>
       <br>
+      {% if request.user.is_authenticated %}
+      <a class="btn btn-outline-light" href="{% url 'home'%}#borrow" style="padding-left:6%;padding-right:6%" >Borrow Book</a>
+      {%else%}
       <a class="btn btn-outline-light" href="{% url 'register' %}" style="padding-left:6%;padding-right:6%" >Register Now</a>
+      {%endif%}
   </div>
 </div>
 
-<div style="margin-left:8%" >
+<div style="margin-left:8%" id="borrow" >
   <h1 class="mt-5 text-center" style="font-size:35px;color:#0a2345">Grave the Book according to your need</h1>
     {% for i in category_name %}
     <a class="btn btn-secondary px-3" style="margin-left:20px;margin-top:50px" href="{% url 'category_wise_car' i.slug %}">{{i.name}}</a>
